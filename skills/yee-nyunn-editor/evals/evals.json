@@ -4,7 +4,7 @@
   {
    "id": 0,
    "name": "cut-to-preview",
-   "prompt": "ok so i've got a talking head clip at /home/naiko/MyProjects/ZachDoStuff/mezz2/cam_b.mezz.mp4 \u2014 it's me talking to camera in burmese, about 2:42, one take with a bunch of restarts and filler in it. i want the filler and the bad takes cut out. before you render anything i want to actually watch the cut and give notes \u2014 my last edit got ruined by cuts that chopped the start and end of my words, so that's the thing i care about most. you've got the nara mcp connected if you need transcription.",
+   "prompt": "ok so i've got a talking head clip at /path/to/interview.mp4 \u2014 it's me talking to camera in burmese, about 2:42, one take with a bunch of restarts and filler in it. i want the filler and the bad takes cut out. before you render anything i want to actually watch the cut and give notes \u2014 my last edit got ruined by cuts that chopped the start and end of my words, so that's the thing i care about most. you've got the nara mcp connected if you need transcription.",
    "expected_output": "A transcript with timestamps, a drop list with reasons, and a playable preview of the cut that required no video encoding. No rendered master.",
    "files": [],
    "assertions": [

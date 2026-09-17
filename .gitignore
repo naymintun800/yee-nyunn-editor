@@ -1,0 +1,5 @@
+# eval runs: partial, machine-specific, and not part of the skill
+skills/yee-nyunn-editor-workspace/
+__pycache__/
+*.pyc
+.DS_Store

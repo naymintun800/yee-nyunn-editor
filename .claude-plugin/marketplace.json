@@ -1,0 +1,20 @@
+{
+  "name": "yee-nyunn-editor",
+  "owner": { "name": "Yee Nyunn", "url": "https://www.youtube.com/@yeenyunn" },
+  "metadata": {
+    "description": "Yee Nyunn's Editor — the full long-form video edit workflow as a skill",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "yee-nyunn-editor",
+      "source": "./",
+      "description": "Edit a long-form video end to end: verified intake, word-timed transcript, a cut decided from text, an instant EDL preview, HyperFrames graphics, a frame-exact composite, and a master at the right loudness.",
+      "version": "1.0.0",
+      "author": { "name": "Yee Nyunn" },
+      "keywords": ["video", "editing", "transcript", "asr", "hyperframes", "ffmpeg", "youtube", "motion-graphics"],
+      "category": "media",
+      "strict": false
+    }
+  ]
+}

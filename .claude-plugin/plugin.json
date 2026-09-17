@@ -1,0 +1,9 @@
+{
+  "name": "yee-nyunn-editor",
+  "description": "End-to-end long-form video editing: transcript-driven cutting, silence-safe cut units, HyperFrames motion graphics, frame-exact ffmpeg compositing, and loudness-correct delivery. For talking-head, interview, podcast, tutorial and YouTube edits built from camera footage plus screen recordings.",
+  "version": "1.0.0",
+  "author": { "name": "Yee Nyunn", "url": "https://www.youtube.com/@yeenyunn" },
+  "license": "MIT",
+  "keywords": ["video", "editing", "transcript", "asr", "hyperframes", "ffmpeg", "youtube", "motion-graphics", "burmese"],
+  "skills": ["./skills/yee-nyunn-editor"]
+}

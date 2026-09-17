@@ -1,0 +1,50 @@
+{
+ "skill_name": "yee-nyunn-editor",
+ "evals": [
+  {
+   "id": 0,
+   "name": "cut-to-preview",
+   "prompt": "ok so i've got a talking head clip at /home/naiko/MyProjects/ZachDoStuff/mezz2/cam_b.mezz.mp4 \u2014 it's me talking to camera in burmese, about 2:42, one take with a bunch of restarts and filler in it. i want the filler and the bad takes cut out. before you render anything i want to actually watch the cut and give notes \u2014 my last edit got ruined by cuts that chopped the start and end of my words, so that's the thing i care about most. you've got the nara mcp connected if you need transcription.",
+   "expected_output": "A transcript with timestamps, a drop list with reasons, and a playable preview of the cut that required no video encoding. No rendered master.",
+   "files": [],
+   "assertions": [
+    "Produced a transcript carrying timestamps (not just text)",
+    "Cut units were derived from silence/energy, not from recogniser segment boundaries",
+    "Drop list gives a reason for each dropped segment",
+    "Delivered a preview playable without any video encoding (EDL/playlist, not an mp4)",
+    "Did NOT render a master video file",
+    "Explained concretely why cut edges will not clip the speaker's words"
+   ]
+  },
+  {
+   "id": 1,
+   "name": "render-drift",
+   "prompt": "my 14 minute video gets rendered as about 80 separate ffmpeg pieces that i concat at the end. the finished file comes out 2.7 seconds LONGER than my timeline says it should be, and a lower third that's supposed to hit at 8:31 lands late. each piece is cut with -ss <start> -t <duration> -c:v h264_nvenc. why is it drifting and how do i make it frame exact? give me the corrected piece render command.",
+   "expected_output": "Identifies that -t yields ceil(dur*fps) frames and that per-piece rounding accumulates; prescribes -frames:v as the difference of rounded timeline positions, plus reading extra input so the decoder can satisfy it.",
+   "files": [],
+   "assertions": [
+    "Identifies that -t <dur> yields ceil(dur*fps) frames as the source of the overshoot",
+    "States that rounding each piece's own duration still accumulates error",
+    "Prescribes -frames:v computed as the difference of ROUNDED TIMELINE positions",
+    "Says to read more input than the piece needs so the decoder can satisfy -frames:v",
+    "Gives a concrete corrected ffmpeg command",
+    "Recommends probing a short span and checking the frame count before a full rebuild"
+   ]
+  },
+  {
+   "id": 2,
+   "name": "loudness-target",
+   "prompt": "i'm targeting -14 LUFS for youtube. doing two pass loudnorm with linear=true. ffmpeg's measuring pass says input_i=-15.78 and input_tp=-0.86, but the finished file measures -16.7 LUFS \u2014 it came out QUIETER than the input. what's happening and what should i actually do about it?",
+   "expected_output": "Explains that linear mode will not exceed its true-peak ceiling so it applies less gain (or negative gain); notes platforms only normalise downward; says reaching the target needs real limiting, which is an audible tradeoff for a human to decide.",
+   "files": [],
+   "assertions": [
+    "Explains that loudnorm linear mode will not exceed its true-peak ceiling",
+    "Connects the -0.86 dB input true peak to the TP=-1.5 target as the reason gain is withheld",
+    "States the mix is therefore attenuated rather than raised",
+    "Notes platforms normalise downward only, so an under-target file just plays quieter",
+    "Says reaching -14 requires real limiting, an audible change",
+    "Frames the tradeoff as the human's decision rather than silently forcing the target"
+   ]
+  }
+ ]
+}

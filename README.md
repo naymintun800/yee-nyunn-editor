@@ -11,15 +11,41 @@ and generators that quietly delete a human's work.
 
 ## Install
 
+### Claude Code
+
 ```
-/plugin marketplace add yeenyunn/yee-nyunn-editor
+/plugin marketplace add naymintun800/yee-nyunn-editor
 /plugin install yee-nyunn-editor
 ```
 
-Or point the marketplace at a local clone:
+### Codex, or any agent following the Agent Skills standard
 
+Codex loads skills from `~/.agents/skills/`, so it is a copy:
+
+```bash
+git clone https://github.com/naymintun800/yee-nyunn-editor
+mkdir -p ~/.agents/skills
+cp -r yee-nyunn-editor/skills/yee-nyunn-editor ~/.agents/skills/
 ```
-/plugin marketplace add /path/to/yee-nyunn-editor
+
+The `.claude-plugin/` manifests are Claude Code specific and are simply ignored elsewhere.
+Two things to know when running outside Claude Code:
+
+- **`references/nara-mcp.md` names MCP tools the way Claude Code exposes them**
+  (`mcp__nara__transcribe`). Your client will name them differently. The same file
+  documents the plain HTTP API, which is what the bundled scripts actually use, so
+  nothing breaks — only the tool names in that one document are client-specific.
+- **The graphics step defers to the upstream HyperFrames skills.** If your agent cannot
+  load those, `references/graphics.md` still covers the integration, and everything from
+  the transcript through to delivery is independent of them.
+
+### Just the scripts
+
+They have no agent dependency at all — Python 3 standard library plus ffmpeg:
+
+```bash
+skills/yee-nyunn-editor/scripts/transcribe.py recording.mov chunks.json
+skills/yee-nyunn-editor/scripts/verify_edges.py chunks.json
 ```
 
 ## What it does

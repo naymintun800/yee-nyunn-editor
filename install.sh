@@ -51,8 +51,14 @@ command -v git >/dev/null || { echo "git is required" >&2; exit 1; }
 
 # Run from inside a clone if that is where this script lives; otherwise fetch a shallow
 # copy into a temp dir that is cleaned up on any exit.
-HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-if [ -f "$HERE/skills/$SKILL/SKILL.md" ]; then
+# BASH_SOURCE is UNSET when this script is piped into bash (curl | bash), and `set -u`
+# turns that into a fatal error -- which broke the one-liner this file advertises.
+SELF="${BASH_SOURCE[0]:-}"
+HERE=""
+if [ -n "$SELF" ] && [ -f "$(dirname "$SELF")/skills/$SKILL/SKILL.md" ]; then
+  HERE="$(cd "$(dirname "$SELF")" && pwd)"
+fi
+if [ -n "$HERE" ]; then
   SRC="$HERE"
 else
   TMP="$(mktemp -d)"; trap 'rm -rf "$TMP"' EXIT

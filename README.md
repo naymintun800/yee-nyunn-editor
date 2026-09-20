@@ -20,12 +20,26 @@ and generators that quietly delete a human's work.
 
 ### Codex, or any agent following the Agent Skills standard
 
-Codex loads skills from `~/.agents/skills/`, so it is a copy:
+```bash
+curl -fsSL https://raw.githubusercontent.com/naymintun800/yee-nyunn-editor/main/install.sh | bash
+```
+
+That copies one directory and writes nothing else. It picks the skills directory your
+client actually uses — `~/.agents/skills` or `~/.codex/skills`, whichever exists —
+and re-running it updates in place. `--dir <path>` to choose, `--uninstall` to remove.
+
+If you would rather read a script before running it (fair — it is 60 lines):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/naymintun800/yee-nyunn-editor/main/install.sh -o install.sh
+less install.sh && bash install.sh
+```
+
+Or do it by hand:
 
 ```bash
 git clone https://github.com/naymintun800/yee-nyunn-editor
-mkdir -p ~/.agents/skills
-cp -r yee-nyunn-editor/skills/yee-nyunn-editor ~/.agents/skills/
+mkdir -p ~/.agents/skills && cp -r yee-nyunn-editor/skills/yee-nyunn-editor ~/.agents/skills/
 ```
 
 The `.claude-plugin/` manifests are Claude Code specific and are simply ignored elsewhere.
